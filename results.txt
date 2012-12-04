@@ -1,0 +1,139 @@
+How the hash functions were chosen in terms of randomness and independence.
+
+- K-Independent, why land on O(log (tablesize))??
+
+- Dot product
+
+What effect do the different families have? (One quicker but crappier)
+
+Randomness...
+
+Input randomness...
+
+Why independence?
+
+The k-independent constructions fill up a similar percentage of the hash table before
+a rehash is necessary, with the increased independence between k hash functions comes
+a large overhead. These hash functions run particularly slow since large primes are
+required for each of the k coefficients. They do; however, hash well on average with the
+3 function construction filling over 50% of the table.
+
+The dot product hash function family execute very quickly but do not exhibit such a strong
+notion of a universal class of hash functions.
+
+THEROY
+
+################################################
+
+For the generalised implementation of cuckoo hashing I constructed several different families of
+hash functions. The first set of hash functions were k-independent constructed according to:@@@
+
+For ALL co ... in [p] I
+
+####################################################
+
+The following tests were performed with a table size of 8192 and a limit on the
+kick out step of 20.
+
+*** 2-Independent hash function family with prime = 24593 and coefficients<prime
+@@@ Average size before rehash with 2 functions : 17.504272%
+	Max with 2 functions: 25.8667%
+@@@ Average size before rehash with 3 functions : 37.229614%
+	Max with 3 functions: 44.433594%
+@@@ Average size before rehash with 4 functions : 59.67102%
+	Max with 4 functions: 64.31885%
+
+*** 13-Independent hash function family with prime = 24593 and coefficients<prime
+@@@ Average size before rehash with 2 functions : 16.990356%
+	Max with 2 functions: 25.8667%
+@@@ Average size before rehash with 3 functions : 37.702637%
+	Max with 3 functions: 48.120117%
+@@@ Average size before rehash with 4 functions : 59.305416%
+	Max with 4 functions: 62.95166%
+	
+*** Dot product hash function family with prime = 24593
+@@@ Average size before rehash with 2 functions: 43.858643%
+	Max with 2 functions: 48.80371%
+@@@ Average size before rehash with 3 functions: 52.93091%
+	Max with 3 functions: 57.592773%
+@@@ Average size before rehash with 4 functions: 65.55786%
+	Max with 4 functions: 69.714355%
+
+*** 2-Independent hash function family with random 128 bit prime and coefficients<prime
+@@@ Average size before rehash with 2 functions : 44.7323%
+@@@ Average size before rehash with 3 functions : 53.466553%
+
+*** 13-Independent hash function family with random 128 bit prime and coefficients<=prime
+@@@ Average size before rehash with 2 functions : 44.15222%
+@@@ Average size before rehash with 3 functions : 53.184326%
+
+*** 20-Independent hash function family with random 128 bit prime and coefficients<prime
+@@@ Average size before rehash with 2 functions : 44.32251%
+@@@ Average size before rehash with 3 functions : 54.768066%
+
+*** DotProduct hash function family with random 128 bit prime and coefficients<prime
+@@@ Average size before rehash with 2 functions (after 1000 tests): 44.571777%
+	Max with 2 functions: 51.77002%
+@@@ Average size before rehash with 3 functions (after 1000 tests): 53.89954%
+	Max with 3 functions: 62.609863%
+@@@ Average size before rehash with 4 functions (after 1000 tests): 66.524414%
+	Max with 4 functions: 74.62158%
+
+
+*** 2-Independent hash function family with 256 bit prime and coefficients<prime
+@@@ Average size before rehash with 2 functions (after 1000 tests): 44.473267%
+	Max with 2 functions: 50.50049%
+@@@ Average size before rehash with 3 functions (after 1000 tests): 53.220455%
+	Max with 3 functions: 59.472656%
+@@@ Average size before rehash with 4 functions (after 1000 tests): 66.04004%
+	Max with 4 functions: 72.9126%
+
+*** 13-Independent hash function family with 256 bit prime and coefficients<prime
+@@@ Average size before rehash with 2 functions : 43.840332%
+@@@ Max with 2 functions: 48.583 984%
+@@@ Average size before rehash with 3 functions : 53.366695%
+@@@ Max with 3 functions: 58.654785%
+
+*** 2-Independent hash function family with 128 bit prime and coefficients<prime
+@@@ Average size before rehash with 2 functions : 43.45642%
+	Max with 2 functions: 49.67041%
+@@@ Average size before rehash with 3 functions : 54.47143%
+	Max with 3 functions: 59.362793%
+@@@ Average size before rehash with 4 functions : 65.38696%
+	Max with 4 functions: 71.80176%
+
+*** 2-Independent hash function family with prime = 393241 and coefficients<prime
+@@@ Average size before rehash with 2 functions : 36.296997%
+	Max with 2 functions: 36.99951%
+@@@ Average size before rehash with 3 functions : 53.9148%
+	Max with 3 functions: 59.179688%
+@@@ Average size before rehash with 4 functions : 66.448364%
+	Max with 4 functions: 72.03369%
+
+*** 13-Independent hash function family with prime = 393241 and coefficients<prime
+@@@ Average size before rehash with 2 functions : 36.66504%
+	Max with 2 functions: 36.99951%
+@@@ Average size before rehash with 3 functions : 52.5531%
+	Max with 3 functions: 60.925293%
+@@@ Average size before rehash with 4 functions : 65.41138%
+	Max with 4 functions: 70.739746%
+
+###################################################
+
+Other interesting results:
+
+*** Dot Product hash function family with random 128 bit prime, coefficients<prime and limit = 100
+REDO!
+
+*** 2-Independent hash function family with random 128 bit prime, coefficients<prime and limit=100
+@@@ Average size before rehash with 2 functions: 52.028687%
+	Max with 2 functions: 56.66504%
+@@@ Average size before rehash with 3 functions: 78.29114%
+	Max with 3 functions: 82.12891%
+@@@ Average size before rehash with 4 functions: 88.87317%
+	Max with 4 functions: 91.674805%
+
+####################################################
+
+
+END OF TESTS
